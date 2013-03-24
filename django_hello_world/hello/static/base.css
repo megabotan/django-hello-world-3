@@ -1,0 +1,10 @@
+#left_col{
+	margin-left: 4%;
+	float: left;
+	width: 48%;
+}
+#right_col{
+	margin-left: 52%;
+	width: 50%;
+}
+		
