@@ -1,5 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-to be filled
+	<div id="left_col">
+
+		<p>Name: {{person.name }}</p>
+		<p>Last name: {{person.last_name }}</p>
+		<p>Date of birth: {{person.date_of_birth }}</p>
+		<p>
+			Bio:
+			<p> 
+				<pre>{{person.bio }}</pre>
+			</p>
+		</p>	
+	</div>
+
+	<div id="right_col">
+		<h3>Contacts</h3>
+		<p>Email: {{person.email}}</p>
+		<p>Jabber: {{person.jabber}}</p>
+		<p>Skype: {{person.skype}}</p>
+		<p>
+			Other contacts: 
+			<p> 
+				<pre>{{person.other_contacts }}</pre>
+			</p>
+		</p>
+	</div>
+	
 {% endblock content %}

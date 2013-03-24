@@ -21,10 +21,14 @@
         "model": "hello.Person",
         "pk": 1,
         "fields": {
-            "name": "Andrew Kovalenko",
-            "date_of_birth": "1991-06-26",
-            "bio": "KPI student",
-            "contacts": "email: adrekoval@gmail.com"
+            "name": "Andrew",
+            "last_name" : "Kovalenko",
+            "date_of_birth" : "1991-06-26",
+            "bio": "KPI \n student",
+            "email" : "adrekoval@gmail.com",
+            "jabber" : "megabotan@jabber.ru",
+            "skype" : "kovalsmall", 
+            "other_contacts": "none"
     }
   }
 ]
