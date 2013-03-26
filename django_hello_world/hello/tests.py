@@ -8,7 +8,7 @@ Replace this with more appropriate tests for your application.
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
-from hello.models import Person
+from django_hello_world.hello.models import Person
 
 
 class HelloTest(TestCase):

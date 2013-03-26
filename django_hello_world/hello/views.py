@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from hello.models import Person
+from django_hello_world.hello.models import Person
 from django.shortcuts import render_to_response
 from django.http import Http404
 from django.template import RequestContext
