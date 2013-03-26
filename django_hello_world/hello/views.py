@@ -8,7 +8,9 @@ def home(request):
     try:
         person = Person.objects.get(id=1)
     except Person.DoesNotExist:
-        raise Http404    
+	error = "db is probaly empty"
+        return render_to_response("hello/index.html", {"error": error}, RequestContext(request))
+	    
     return render_to_response("hello/index.html", {"person": person}, RequestContext(request))
 
 
