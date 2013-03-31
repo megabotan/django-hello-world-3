@@ -21,6 +21,7 @@ class HttpTest(TestCase):
         c = Client()
         response = c.get('/')
         self.assertContains(response,self.me.name)
-        self.assertContains(response,self.me.bio)
+	for string in self.me.bio.splitlines():
+            self.assertContains(response,string)
         self.assertContains(response,self.me.email)
 
