@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
 from hello.models import Person
+from django.conf import settings
 
 
 class HelloTest(TestCase):
@@ -21,7 +22,7 @@ class HelloTest(TestCase):
 
 class HttpTest(TestCase):
     def setUp(self):
-        self.me = Person.objects.get(id=1)
+        self.me = Person.objects.get(id=settings.MY_ID)
 
     def test_home(self):
         c = Client()
