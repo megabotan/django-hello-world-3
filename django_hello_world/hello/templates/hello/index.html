@@ -1,25 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
-	{% if error%}
-		<p>{{error}}</p>
-	{% else %}
-		<div id="left_col">
+	<div class="left_col">
 
-			<p>Name: {{person.name }}</p>
-			<p>Last name: {{person.last_name }}</p>
-			<p>Date of birth: {{person.date_of_birth }}</p>
-			<p>Bio:</p> 
-			<p><pre>{{person.bio }}</pre></p>
-		</div>
+		<p>Name: {{person.name }}</p>
+		<p>Last name: {{person.last_name }}</p>
+		<p>Date of birth: {{person.date_of_birth }}</p>
+		<p>Bio:</p> 
+		<p>{{person.bio|linebreaks}}</p>
+	</div>
 
-		<div id="right_col">
-			<h3>Contacts</h3>
-			<p>Email: {{person.email}}</p>
-			<p>Jabber: {{person.jabber}}</p>
-			<p>Skype: {{person.skype}}</p>
-			<p>Other contacts: </p>
-			<p><pre>{{person.other_contacts }}</pre></p>
-		</div>
-	{% endif %}
+	<div class="right_col">
+		<h3>Contacts</h3>
+		<p>Email: {{person.email}}</p>
+		<p>Jabber: {{person.jabber}}</p>
+		<p>Skype: {{person.skype}}</p>
+		<p>
+			Other contacts: 
+			<p> 
+				{{person.other_contacts|linebreaks }}
+			</p>
+		</p>
+	</div>
+	
 {% endblock content %}
