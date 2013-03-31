@@ -28,7 +28,7 @@ class MiddlewareTest(TestCase):
         requestString='/vblkzlcxvbru'
         c = Client()
         c.get(requestString)
-        lastRequest = Request.objects.get(path=requestString)
-        self.assertTrue(lastRequest.exists())
+        lastRequest = Request.objects.get(path=requestString)#if something is wrong will throw exception
+        self.assertTrue(True)
         
         

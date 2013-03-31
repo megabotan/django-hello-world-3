@@ -18,6 +18,7 @@ class Request(models.Model):
     path = models.CharField(max_length=200)
     method = models.CharField(max_length=10)
     user = models.CharField(max_length=200)
+    date = models.DateTimeField()
 
     def __unicode__(self):
         return self.method + " " + self.path
