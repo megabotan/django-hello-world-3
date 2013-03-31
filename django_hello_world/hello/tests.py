@@ -1,10 +1,3 @@
-"""
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
-
-Replace this with more appropriate tests for your application.
-"""
-
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
@@ -30,5 +23,4 @@ class HttpTest(TestCase):
         self.assertContains(response,self.me.name)
         self.assertContains(response,self.me.bio)
         self.assertContains(response,self.me.email)
-
 

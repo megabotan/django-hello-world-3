@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<div id="left_col">
+	<div class="left_col">
 
 		<p>Name: {{person.name }}</p>
 		<p>Last name: {{person.last_name }}</p>
 		<p>Date of birth: {{person.date_of_birth }}</p>
 		<p>Bio:</p> 
-		<p><pre>{{person.bio }}</pre></p>
+		<p>{{person.bio|linebreaks}}</p>
 	</div>
 
-	<div id="right_col">
+	<div class="right_col">
 		<h3>Contacts</h3>
 		<p>Email: {{person.email}}</p>
 		<p>Jabber: {{person.jabber}}</p>
@@ -18,7 +18,7 @@
 		<p>
 			Other contacts: 
 			<p> 
-				<pre>{{person.other_contacts }}</pre>
+				{{person.other_contacts|linebreaks }}
 			</p>
 		</p>
 	</div>
