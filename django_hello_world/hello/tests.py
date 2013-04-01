@@ -46,6 +46,15 @@ class MiddlewareTest(TestCase):
         self.assertEquals(lastRequest.method, "GET")
 
 
+class TemplateContextProcessor(TestCase):
+    def test_settings(self):
+        requestString = '/vblkzlcxvbru'
+        c = Client()
+        response = c.get(requestString)
+        self.assertTrue('settings' in response.context)
+        self.assertEquals(response.context['settings'], settings)
+
+
 @unittest.skipIf(selenium_not_exists(), "selenium cant work in virtualenv")
 class HttpTestSelenium(LiveServerTestCase):
 
