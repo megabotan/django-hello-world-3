@@ -27,6 +27,14 @@ class HttpTest(TestCase):
             self.assertContains(response, string)
         self.assertContains(response, self.me.email)
 
+    def test_requests(self):
+        requestString = '/vblkzlcxvbru'
+        c = Client()
+        c.get(requestString)
+        response = c.get('/requests/')
+        for req in Request.objects.all().order_by('date')[:10]:
+            self.assertContains(response, req.path)
+
 
 class MiddlewareTest(TestCase):
     def test(self):
@@ -48,8 +56,8 @@ class HttpTestSelenium(LiveServerTestCase):
 
     @classmethod
     def tearDownClass(cls):
-        super(HttpTestSelenium, cls).tearDownClass()
         cls.driver.quit()
+        super(HttpTestSelenium, cls).tearDownClass()
 
     def test_check_admin_work_and_contains_Person(self):
         from selenium.webdriver.common.keys import Keys
@@ -67,3 +75,13 @@ class HttpTestSelenium(LiveServerTestCase):
 
         polls_links = self.driver.find_elements_by_link_text('Persons')
         self.assertEquals(len(polls_links), 1)  # checks Person in admin
+
+    def test_requests_page(self):
+        self.driver.get(self.live_server_url + '/')
+        body = self.driver.find_element_by_tag_name('body')
+        self.assertIn('requests', body.text)  # checks requests href
+        self.driver.find_element_by_link_text("requests").click()
+        body = self.driver.find_element_by_tag_name('body')
+        requests_ = Request.objects.all().order_by('date')[:10]
+        for req in requests_:
+            self.assertIn(req.path, body.text)
