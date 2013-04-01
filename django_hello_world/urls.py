@@ -6,6 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'django_hello_world.hello.views.home'),
+    url(r'^requests/$', 'django_hello_world.hello.views.requests'),
     # url(r'^django_hello_world/', include('django_hello_world.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

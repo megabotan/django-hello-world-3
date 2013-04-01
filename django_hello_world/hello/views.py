@@ -1,5 +1,4 @@
-from django.contrib.auth.models import User
-from django_hello_world.hello.models import Person
+from django_hello_world.hello.models import Person, Request
 from django.shortcuts import render, get_object_or_404
 from django.conf import settings
 
@@ -9,4 +8,7 @@ def home(request):
     return render(request, "hello/index.html", {"person": person})
 
 
-
+def requests(request):
+    first_requests = Request.objects.all().order_by('date')[:10]
+    return render(request, "hello/requests.html",
+                  {"first_requests": first_requests})

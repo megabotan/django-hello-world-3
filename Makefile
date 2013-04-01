@@ -1,12 +1,16 @@
 MANAGE=python django_hello_world/manage.py
+PYTHONPATH=`pwd`
 
 test:
-	PYTHONPATH=`pwd` DJANGO_SETTINGS_MODULE=django_hello_world.settings $(MANAGE) test hello
+	DJANGO_SETTINGS_MODULE=django_hello_world.settings $(MANAGE) test hello
+
+check_syntax:
+	flake8 --exclude=migrations django_hello_world/hello
 
 run:
-	PYTHONPATH=`pwd` DJANGO_SETTINGS_MODULE=django_hello_world.settings $(MANAGE) runserver
+	DJANGO_SETTINGS_MODULE=django_hello_world.settings $(MANAGE) runserver
 
 syncdb:
-	PYTHONPATH=`pwd` DJANGO_SETTINGS_MODULE=django_hello_world.settings 
+	DJANGO_SETTINGS_MODULE=django_hello_world.settings 
 	$(MANAGE) syncdb --noinput  
 	$(MANAGE) migrate

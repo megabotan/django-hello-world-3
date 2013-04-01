@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div>
+        <ul>
+            {% for request_ in first_requests %}
+                <li>{{request_.path}}</li>
+            {% endfor %}
+        </ul>
+		
+	</div>
+	
+{% endblock content %}
