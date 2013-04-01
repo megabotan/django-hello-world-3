@@ -147,4 +147,4 @@ LOGGING = {
 }
 
 # Id of object that is displayed at home page
-MY_ID = '1'
+MY_ID = 1
