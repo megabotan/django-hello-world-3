@@ -28,7 +28,7 @@ class HttpTest(TestCase):
         self.assertContains(response, self.me.email)
 
 
-@unittest.skipIf(selenium_not_exists(), "selenium cant work in virtualenv")
+@unittest.skipIf(selenium_not_exists(), "selenium can't work in virtualenv")
 class HttpTestSelenium(LiveServerTestCase):
 
     @classmethod
