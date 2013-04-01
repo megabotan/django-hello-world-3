@@ -1,4 +1,3 @@
-from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
 from django_hello_world.hello.models import Person, Request
