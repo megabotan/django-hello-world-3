@@ -6,29 +6,6 @@ from django.test import LiveServerTestCase
 import unittest
 
 
-def selenium_not_exists():
-    try:
-        __import__('selenium')
-    except ImportError:
-        return True
-    else:
-        return False
-
-
-class HttpTest(TestCase):
-    def setUp(self):
-        self.me = Person.objects.get(id=settings.MY_ID)
-
-    def test_home(self):
-        c = Client()
-        response = c.get('/')
-        self.assertContains(response, self.me.name)
-        for string in self.me.bio.splitlines():
-            self.assertContains(response, string)
-        self.assertContains(response, self.me.email)
-
-
-@unittest.skipIf(selenium_not_exists(), "selenium can't work in virtualenv")
 class HttpTestSelenium(LiveServerTestCase):
 
     @classmethod
@@ -56,5 +33,5 @@ class HttpTestSelenium(LiveServerTestCase):
         body = self.driver.find_element_by_tag_name('body')
         self.assertIn('Site administration', body.text)  # checks you can login
 
-        polls_links = self.driver.find_elements_by_link_text('Persons')
-        self.assertEquals(len(polls_links), 1)  # checks Person in admin
+        persons_links = self.driver.find_elements_by_link_text('Persons')
+        self.assertEquals(len(persons_links), 1)  # checks Person in admin
