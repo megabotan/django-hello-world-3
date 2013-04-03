@@ -1,9 +1,4 @@
-from django.test import TestCase
-from django.test.client import Client
-from django_hello_world.hello.models import Person
-from django.conf import settings
 from django.test import LiveServerTestCase
-import unittest
 
 
 class HttpTestSelenium(LiveServerTestCase):
