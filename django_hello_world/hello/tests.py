@@ -1,5 +1,4 @@
 from django.test import TestCase
-from django.test.client import Client
 from django_hello_world.hello.models import Person, Request
 from django.conf import settings
 from django.test import LiveServerTestCase
@@ -20,8 +19,7 @@ class HttpTest(TestCase):
         self.me = Person.objects.get(id=settings.MY_ID)
 
     def test_home(self):
-        c = Client()
-        response = c.get('/')
+        response = self.client.get('/')
         self.assertContains(response, self.me.name)
         for string in self.me.bio.splitlines():
             self.assertContains(response, string)
