@@ -53,7 +53,7 @@ class HttpTestSelenium(LiveServerTestCase):
         self.driver.get(self.live_server_url + '/edit/')
         data = dict(name='name',
                     last_name='last_name',
-                    date_of_birth='1999-01-01',
+                    #date_of_birth='1999-01-01',
                     bio='bio',
                     email='email@email.com',
                     jabber='jabber',
@@ -61,9 +61,15 @@ class HttpTestSelenium(LiveServerTestCase):
                     other_contacts='other_contacts'
                     )
         for elem in data:
-            self.driver.find_element_by_name(elem).send_keys(data[elem])
-        self.driver.find_element_by_name('submit').click()
+            field = self.driver.find_element_by_name(elem)
+            field.clear()
+            field.send_keys(data[elem])
+        field = self.driver.find_element_by_name('date_of_birth')
+        field.clear()
+        field.send_keys('1999-01-01')
+        self.driver.find_element_by_name(data.keys()[0]).submit()
         self.driver.get(self.live_server_url + '/')
         body = self.driver.find_element_by_tag_name('body')
         for elem in data:
             self.assertIn(data[elem], body.text)
+        self.assertIn('Jan. 1, 1999', body.text)
