@@ -10,3 +10,18 @@ div.right_col{
 div.footer {
     margin-top: 100px;
 }
+table.requests{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+table.requests tr{
+    border: 1px;
+}
+table.requests td{
+    border: 1px solid;
+    padding: 8px;
+}
+table.requests th{
+    border: 2px solid black;
+    padding: 8px;
+}

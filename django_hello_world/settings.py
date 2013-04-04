@@ -92,7 +92,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',
     'django.core.context_processors.static',
     'django.contrib.messages.context_processors.messages',  
-    'django_hello_world.hello.contextProcessors.handle_settings',)
+    'django_hello_world.hello.context_processors.handle_settings',)
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -107,7 +107,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django_hello_world.hello.HttpRequestMiddleware.Middleware',
+    'django_hello_world.hello.http_request_middleware.Middleware',
 )
 
 ROOT_URLCONF = 'django_hello_world.urls'
@@ -161,3 +161,4 @@ LOGGING = {
 
 # Id of object that is displayed at home page
 MY_ID = 1
+REQUESTS_ON_PAGE = 10

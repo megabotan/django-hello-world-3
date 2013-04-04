@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Person(models.Model):
@@ -18,8 +19,8 @@ class Person(models.Model):
 class Request(models.Model):
     path = models.CharField(max_length=200)
     method = models.CharField(max_length=10)
-    user = models.CharField(max_length=200)
-    date = models.DateTimeField()
+    user = models.ForeignKey(User, blank=True, null=True)
+    date = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
         return self.method + " " + self.path

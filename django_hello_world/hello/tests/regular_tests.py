@@ -15,19 +15,18 @@ class HttpTest(TestCase):
         self.assertContains(response, self.me.email)
 
     def test_requests(self):
-        requestString = '/vblkzlcxvbru'
-        self.client.get(requestString)
+        reqests_on_page = settings.REQUESTS_ON_PAGE
+        for i in range(reqests_on_page*2):
+            requestString = '/vblkzlcxvbru' + str(i)
+            self.client.get(requestString)
         response = self.client.get('/requests/')
-        for req in Request.objects.all().order_by('date')[:10]:
-            self.assertContains(response, req.path)
-
-
-class MiddlewareTest(TestCase):
-    def test(self):
-        requestString = '/vblkzlcxvbru'
-        self.client.get(requestString)
-        lastRequest = Request.objects.get(path=requestString)
-        self.assertEquals(lastRequest.method, "GET")
+        expected_requests = (Request.objects.all()
+                             .order_by('date')[:reqests_on_page*2]
+                             )
+        for i in range(reqests_on_page):
+            self.assertContains(response, expected_requests[i].path)
+        for i in range(reqests_on_page, reqests_on_page*2):
+            self.assertNotContains(response, expected_requests[i].path)
 
 
 class TemplateContextProcessor(TestCase):
