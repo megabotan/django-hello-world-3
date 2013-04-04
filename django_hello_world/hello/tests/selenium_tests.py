@@ -1,51 +1,8 @@
-from django.test import TestCase
-from django.test.client import Client
-from django_hello_world.hello.models import Person, Request
+from django_hello_world.hello.models import Request
 from django.conf import settings
 from django.test import LiveServerTestCase
-import unittest
 
 
-def selenium_not_exists():
-    try:
-        __import__('selenium')
-    except ImportError:
-        return True
-    else:
-        return False
-
-
-class HttpTest(TestCase):
-    def setUp(self):
-        self.me = Person.objects.get(id=settings.MY_ID)
-
-    def test_home(self):
-        c = Client()
-        response = c.get('/')
-        self.assertContains(response, self.me.name)
-        for string in self.me.bio.splitlines():
-            self.assertContains(response, string)
-        self.assertContains(response, self.me.email)
-
-    def test_requests(self):
-        requestString = '/vblkzlcxvbru'
-        c = Client()
-        c.get(requestString)
-        response = c.get('/requests/')
-        for req in Request.objects.all().order_by('date')[:10]:
-            self.assertContains(response, req.path)
-
-
-class MiddlewareTest(TestCase):
-    def test(self):
-        requestString = '/vblkzlcxvbru'
-        c = Client()
-        c.get(requestString)
-        lastRequest = Request.objects.get(path=requestString)
-        self.assertEquals(lastRequest.method, "GET")
-
-
-@unittest.skipIf(selenium_not_exists(), "selenium cant work in virtualenv")
 class HttpTestSelenium(LiveServerTestCase):
 
     @classmethod
