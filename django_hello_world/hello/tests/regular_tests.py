@@ -28,6 +28,22 @@ class HttpTest(TestCase):
         for i in range(reqests_on_page, reqests_on_page*2):
             self.assertNotContains(response, expected_requests[i].path)
 
+    def test_edit_page(self):
+        new_name = self.me.name+'1'
+        response = self.client.get('/edit/')
+        self.assertEqual(response.status_code, 200)
+        self.client.post('/edit/', {'name': new_name,
+                                    'last_name': self.me.last_name,
+                                    'date_of_birth': self.me.date_of_birth,
+                                    'bio': self.me.bio,
+                                    'email': self.me.email,
+                                    'jabber': self.me.jabber,
+                                    'skype': self.me.skype,
+                                    'other_contacts': self.me.other_contacts,
+                                    })
+        response = self.client.get('/')
+        self.assertContains(response, new_name)
+
 
 class TemplateContextProcessor(TestCase):
     def test_settings(self):

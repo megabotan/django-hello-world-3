@@ -40,11 +40,30 @@ class HttpTestSelenium(LiveServerTestCase):
         body = self.driver.find_element_by_tag_name('body')
         self.assertIn('requests', body.text)  # checks requests href
         self.driver.find_element_by_link_text("requests").click()
-        body = self.driver.find_element_by_tag_name('body')
+        body_text = self.driver.find_element_by_tag_name('body').text
         expected_requests = (Request.objects.all()
                              .order_by('date')[:reqests_on_page*2]
                              )
         for i in range(reqests_on_page):
-            self.assertIn(expected_requests[i].path, body.text)
+            self.assertIn(expected_requests[i].path, body_text)
         for i in range(reqests_on_page, reqests_on_page*2):
-            self.assertNotIn(expected_requests[i].path, body.text)
+            self.assertNotIn(expected_requests[i].path, body_text)
+
+    def test_edit_page(self):
+        self.driver.get(self.live_server_url + '/edit/')
+        data = dict(name='name',
+                    last_name='last_name',
+                    date_of_birth='1999-01-01',
+                    bio='bio',
+                    email='email@email.com',
+                    jabber='jabber',
+                    skype='skype',
+                    other_contacts='other_contacts'
+                    )
+        for elem in data:
+            self.driver.find_element_by_name(elem).send_keys(data[elem])
+        self.driver.find_element_by_name('submit').click()
+        self.driver.get(self.live_server_url + '/')
+        body = self.driver.find_element_by_tag_name('body')
+        for elem in data:
+            self.assertIn(data[elem], body.text)
