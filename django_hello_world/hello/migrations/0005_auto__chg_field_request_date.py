@@ -8,21 +8,14 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'Request'
-        db.create_table('hello_request', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('path', self.gf('django.db.models.fields.CharField')(max_length=200)),
-            ('method', self.gf('django.db.models.fields.CharField')(max_length=10)),
-            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True)),
-            ('date', self.gf('django.db.models.fields.DateTimeField')()),
-        ))
-        db.send_create_signal('hello', ['Request'])
 
+        # Changing field 'Request.date'
+        db.alter_column('hello_request', 'date', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True))
 
     def backwards(self, orm):
-        # Deleting model 'Request'
-        db.delete_table('hello_request')
 
+        # Changing field 'Request.date'
+        db.alter_column('hello_request', 'date', self.gf('django.db.models.fields.DateTimeField')())
 
     models = {
         'auth.group': {
@@ -75,7 +68,7 @@ class Migration(SchemaMigration):
         },
         'hello.request': {
             'Meta': {'object_name': 'Request'},
-            'date': ('django.db.models.fields.DateTimeField', [], {}),
+            'date': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'method': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
             'path': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
