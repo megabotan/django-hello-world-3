@@ -31,16 +31,18 @@ class HttpTest(TestCase):
     def test_edit_page(self):
         new_name = self.me.name+'1'
         response = self.client.get('/edit/')
-        self.assertEqual(response.status_code, 200)
-        self.client.post('/edit/', {'name': new_name,
-                                    'last_name': self.me.last_name,
-                                    'date_of_birth': self.me.date_of_birth,
-                                    'bio': self.me.bio,
-                                    'email': self.me.email,
-                                    'jabber': self.me.jabber,
-                                    'skype': self.me.skype,
-                                    'other_contacts': self.me.other_contacts,
-                                    })
+        self.assertRedirects(response, '/login/')
+        self.assertTrue(self.client.login(username='admin', password='admin'))
+        response = self.client.post('/edit/',
+                                    {'name': new_name,
+                                     'last_name': self.me.last_name,
+                                     'date_of_birth': self.me.date_of_birth,
+                                     'bio': self.me.bio,
+                                     'email': self.me.email,
+                                     'jabber': self.me.jabber,
+                                     'skype': self.me.skype,
+                                     'other_contacts': self.me.other_contacts,
+                                     })
         response = self.client.get('/')
         self.assertContains(response, new_name)
 

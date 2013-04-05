@@ -1,6 +1,7 @@
 from django_hello_world.hello.models import Request
 from django.conf import settings
 from django.test import LiveServerTestCase
+from selenium.webdriver.common.keys import Keys
 
 
 class HttpTestSelenium(LiveServerTestCase):
@@ -17,7 +18,6 @@ class HttpTestSelenium(LiveServerTestCase):
         super(HttpTestSelenium, cls).tearDownClass()
 
     def test_check_admin_work_and_contains_Person(self):
-        from selenium.webdriver.common.keys import Keys
         self.driver.get(self.live_server_url + '/admin/')
         body = self.driver.find_element_by_tag_name('body')
         self.assertIn('Django administration', body.text)  # checks admin is up
@@ -51,6 +51,17 @@ class HttpTestSelenium(LiveServerTestCase):
 
     def test_edit_page(self):
         self.driver.get(self.live_server_url + '/edit/')
+        self.assertEquals(self.driver.current_url,
+                          self.live_server_url + '/login/'
+                          )
+        username_field = self.driver.find_element_by_name('username')
+        username_field.send_keys('admin')
+        password_field = self.driver.find_element_by_name('password')
+        password_field.send_keys('admin')
+        password_field.send_keys(Keys.RETURN)
+        self.assertEquals(self.driver.current_url,
+                          self.live_server_url + '/edit/'
+                          )
         data = dict(name='name',
                     last_name='last_name',
                     #date_of_birth='1999-01-01',
