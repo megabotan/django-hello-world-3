@@ -159,6 +159,8 @@ LOGGING = {
     }
 }
 
+LOGIN_URL = '/login/'
+
 # Id of object that is displayed at home page
 MY_ID = 1
 REQUESTS_ON_PAGE = 10

@@ -31,7 +31,7 @@ class HttpTest(TestCase):
     def test_edit_page(self):
         new_name = self.me.name+'1'
         response = self.client.get('/edit/')
-        self.assertRedirects(response, '/login/')
+        self.assertRedirects(response, '/login/?next=/edit/')
         self.assertTrue(self.client.login(username='admin', password='admin'))
         response = self.client.post('/edit/',
                                     {'name': new_name,

@@ -52,7 +52,7 @@ class HttpTestSelenium(LiveServerTestCase):
     def test_edit_page(self):
         self.driver.get(self.live_server_url + '/edit/')
         self.assertEquals(self.driver.current_url,
-                          self.live_server_url + '/login/'
+                          self.live_server_url + '/login/?next=/edit/'
                           )
         username_field = self.driver.find_element_by_name('username')
         username_field.send_keys('admin')

@@ -3,6 +3,7 @@ from django_hello_world.hello.forms import PersonForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -16,6 +17,7 @@ def requests(request):
                   {'first_requests': first_requests})
 
 
+@login_required
 def edit(request):
     person = get_object_or_404(Person, id=settings.MY_ID)
     if request.method == 'POST':
