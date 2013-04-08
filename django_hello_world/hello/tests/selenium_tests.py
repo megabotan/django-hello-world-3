@@ -62,9 +62,10 @@ class HttpTestSelenium(LiveServerTestCase):
         self.assertEquals(self.driver.current_url,
                           self.live_server_url + '/edit/'
                           )
+        body = self.driver.find_element_by_tag_name('body')
+        self.assertIn('Cancel', body.text)
         data = dict(name='name',
                     last_name='last_name',
-                    #date_of_birth='1999-01-01',
                     bio='bio',
                     email='email@email.com',
                     jabber='jabber',
